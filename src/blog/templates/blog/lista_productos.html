@@ -2,17 +2,16 @@
 
 {% block content %}
     <div class="text-center">
-        <h2 class="titulo">Lista de Productos</h2>
+        <h2 class="titulo-derretido text-uppercase mb-4">Lista de Productos</h2>
     </div>
     <div class="row">
         {% for producto in productos %}
             <div class="col-md-4 mb-3">
                 <div class="card shadow-sm border-0">
                     <div class="card-body">
-                        <h5 class="card-title">{{ producto.nombre }}</h5>
-                        <p class="card-text text-muted">{{ producto.descripcion }}</p>
-                        <h6 class="text-success">${{ producto.precio }}</h6>
-                        <button class="btn btn-primary">Ver más</button>
+                        <h5 class="card-title producto-nombre">{{ producto.nombre }}</h5>
+                        <p class="card-text text-muted text-center">{{ producto.descripcion }}</p>
+                        <h6 class="text-success text-center">${{ producto.precio }}</h6>
                     </div>
                 </div>
             </div>
