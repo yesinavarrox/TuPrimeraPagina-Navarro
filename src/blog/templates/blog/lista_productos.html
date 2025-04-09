@@ -1,9 +1,17 @@
 {% extends "blog/base.html" %}
 
+{% load static %}
+
 {% block content %}
     <div class="text-center">
         <h2 class="titulo2 mb-4">Lista de Productos</h2>
     </div>
+<img src="{% static 'blog/chocorosa.jpg' %}" alt="PANCHOCH" height="200px">
+<img src="{% static 'blog/normi.jpg' %}" alt="PANQUI" height="200px"> 
+<img src="{% static 'blog/dulce.jpg' %}" alt="PANQUIS" height="200px">
+<img src="{% static 'blog/fruti.jpg' %}" alt="PANFRES" height="200px">
+<img src="{% static 'blog/chococafe.jpg' %}" alt="PANCHOCHS" height="200px">
+<img src="{% static 'blog/plat.jpg' %}" alt="PANQUII" height="200px">
     <div class="row">
         {% for producto in productos %}
             <div class="col-md-4 mb-3">
