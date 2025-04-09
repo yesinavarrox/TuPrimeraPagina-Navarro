@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,6 +18,12 @@
             color: #FF69B4; /* Color rosa fuerte */
             text-shadow: 3px 3px #FFD1DC; /* Sombra suave en rosa claro */
         }
+        .titulo2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            color: #6d9ee2; 
+            text-shadow: 3px 3px #FFD1DC;
+        }
         .titulo-derretido {
             font-family: 'Iceberg', cursive;
             font-size: 1.5rem;
@@ -35,14 +42,20 @@
             color: #89CFF0;
             text-shadow: 2px 2px rgba(0, 0, 0, 0.1);
         }
+        .cuerpo {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: #083246; 
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand titulo" href="#">Honey Panqui</a>
-            <a class="navbar-brand titulo-derretido" href="#">Productos</a>
-            <a class="navbar-brand titulo-derretido" href="#">Nosotros</a>
+            <a class="navbar-brand titulo" href={% url 'HoneyPanqui:home' %}>Honey Panqui</a>
+            <a class="navbar-brand titulo-derretido" href={% url 'HoneyPanqui:lista_productos' %}>Productos</a>
+            <a class="navbar-brand titulo-derretido" href={% url 'HoneyPanqui:about' %}>Nosotros</a>
             <a class="navbar-brand botones-especiales" href="#">Iniciar Sesión</a>
             <a class="navbar-brand botones-especiales" href="#">Registrarse</a>
         </div>
