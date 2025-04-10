@@ -37,6 +37,8 @@
             font-size: 1.2rem;
         }
         .botones-especiales {
+            background: none;
+            border: none;
             font-family: 'Iceberg', cursive;
             font-size: 1.5rem;
             color: #89CFF0;
@@ -74,8 +76,16 @@
             <a class="navbar-brand titulo" href={% url 'HoneyPanqui:home' %}>Honey Panqui</a>
             <a class="navbar-brand titulo-derretido" href={% url 'HoneyPanqui:lista_productos' %}>Productos</a>
             <a class="navbar-brand titulo-derretido" href={% url 'HoneyPanqui:about' %}>Nosotros</a>
-            <a class="navbar-brand botones-especiales" href="#">Iniciar Sesión</a>
-            <a class="navbar-brand botones-especiales" href="#">Registrarse</a>
+            {% if  user.is_authenticated %}
+                <form action="{% url 'HoneyPanqui:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="botones-especiales enlace-navbar">Cerrar Sesión</button>
+                </form>
+            {% else %}
+                <a class="navbar-brand botones-especiales" href={% url 'HoneyPanqui:login' %}>Iniciar Sesión</a>
+                <a class="navbar-brand botones-especiales" href="#">Registrarse</a>
+            {% endif %}
+
         </div>
     </nav>
     <div class="container mt-4">
