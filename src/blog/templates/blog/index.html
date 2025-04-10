@@ -4,6 +4,9 @@
 
     <div class="text-center">
         <h2 class="titulo2 mb-4">¡Bienvenidos a nuestra tienda!</h2>
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
     </div>
 
 {% endblock %}

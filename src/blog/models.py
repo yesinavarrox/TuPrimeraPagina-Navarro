@@ -1,8 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Creación de los 3 modelos
 
 class Cliente(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=80)
     apellido = models.CharField(max_length=80)
     usuario = models.CharField(max_length=80, unique=True)
@@ -11,7 +13,7 @@ class Cliente(models.Model):
     direccion = models.TextField(unique=True)
     
     def __str__(self) -> str:
-        return f"{self.nombre} {self.apellido} - usuario: {self.usuario}"
+        return f"{self.user.username} ({self.nombre})"
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=50)

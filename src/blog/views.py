@@ -1,16 +1,35 @@
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from .models import Producto
-from .forms import ClienteForm
+from django.contrib import messages
+from django.views.generic import CreateView
+from .models import Producto, Cliente
+from .forms import ClienteForm, RegistroForm
 
-# CLIENTES:
+# CLIENTES - Login - Registro:
 
 class ClienteView(LoginView):
-    template_name = "blog/login.html"
+    template_name = 'blog/login.html'
     authentication_form = ClienteForm
-    next_page = reverse_lazy("HoneyPanqui:home")
+    next_page = reverse_lazy('HoneyPanqui:home')
+    
+    def form_valid(self, form):
+        usuario = form.get_user()
+        messages.success(self.request, f"¡{usuario.username}, a comer todos los hotcakes en tu sesión!")
+        return super().form_valid(form)
 
+class RegistroView(CreateView):
+    form_class = RegistroForm
+    template_name = 'blog/registro.html'
+    success_url = reverse_lazy('HoneyPanqui:login')
+    
+    def form_valid(self, form):
+        user = form.save()
+        fecha_nacimiento = form.cleaned_data.get('fecha_nacimiento')
+        Cliente.objects.create(user=user, fecha_nacimiento=fecha_nacimiento)
+        messages.success(self.request, f"Registro Completado. ¡Ahora puedes comprar hotcakes iniciando tu sesión!")
+        return super().form_valid(form)
+    
 #PEDIDOS
 
 

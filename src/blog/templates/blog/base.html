@@ -82,8 +82,8 @@
                     <button type="submit" class="botones-especiales enlace-navbar">Cerrar Sesión</button>
                 </form>
             {% else %}
-                <a class="navbar-brand botones-especiales" href={% url 'HoneyPanqui:login' %}>Iniciar Sesión</a>
-                <a class="navbar-brand botones-especiales" href="#">Registrarse</a>
+                <a class="navbar-brand botones-especiales" href="{% url 'HoneyPanqui:login' %}">Iniciar Sesión</a>
+                <a class="navbar-brand botones-especiales" href="{% url 'HoneyPanqui:registro' %}">Registrarse</a>
             {% endif %}
 
         </div>
