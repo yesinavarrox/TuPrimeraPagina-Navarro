@@ -7,7 +7,6 @@ class Cliente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=80)
     apellido = models.CharField(max_length=80)
-    usuario = models.CharField(max_length=80, unique=True)
     email = models.EmailField(unique=True)
     nacimiento = models.DateField(null=True, blank=True)
     direccion = models.TextField(unique=True)
@@ -32,4 +31,4 @@ class Pedido(models.Model):
     id = models.AutoField(primary_key=True)
     
     def __str__(self) -> str:
-        return f"Pedido {self.id} - {self.cliente.usuario}"
+        return f"Pedido {self.id} - {self.cliente.user.username}"

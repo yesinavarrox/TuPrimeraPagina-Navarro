@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="text-center">
-        <h2 class="titulo2 mb-4">Registro de Usuario</h2>
+        <h2 class="titulo2 mb-4">Registro de Usuarios</h2>
     </div> 
     <div class="container d-flex justify-content-center mt-5">
         <div class="col-md-5">
@@ -11,6 +11,19 @@
                     <h5 class="card-title producto-nombre">
                         <form method="post">
                             {% csrf_token %}
+                            <div style="margin-bottom: 15px;">
+                                {{ form.nombre }}
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                {{ form.apellido }}
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label for="{{ form.fecha_nacimiento.id_for_label }}" style="font-size: 18px;" class="cuerpo">Fecha de nacimiento:</label>
+                                {{ form.nacimiento }}
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                {{ form.direccion }}
+                            </div>
                             <div style="margin-bottom: 15px;">
                                 {{ form.username }}
                             </div>
@@ -22,10 +35,6 @@
                                 </div>
                                 <div style="margin-bottom: 15px;">
                                     {{ form.password2 }}
-                                </div>
-                                <div style="margin-bottom: 15px;">
-                                    <label for="{{ form.fecha_nacimiento.id_for_label }}" style="font-size: 18px;" class="cuerpo">Fecha de nacimiento:</label>
-                                    {{ form.fecha_nacimiento }}
                                 </div>
                             <button type="submit" class="btn btn-primary w-100 mt-3">Registrar</button>
                         </form>

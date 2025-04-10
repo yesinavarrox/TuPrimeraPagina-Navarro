@@ -22,14 +22,12 @@ class RegistroView(CreateView):
     form_class = RegistroForm
     template_name = 'blog/registro.html'
     success_url = reverse_lazy('HoneyPanqui:login')
-    
+
     def form_valid(self, form):
-        user = form.save()
-        fecha_nacimiento = form.cleaned_data.get('fecha_nacimiento')
-        Cliente.objects.create(user=user, fecha_nacimiento=fecha_nacimiento)
-        messages.success(self.request, f"Registro Completado. ¡Ahora puedes comprar hotcakes iniciando tu sesión!")
+        form.save()
+        messages.success(self.request, "¡Registro Completado. ¡Ahora puedes comprar hotcakes iniciando tu sesión!")
         return super().form_valid(form)
-    
+
 #PEDIDOS
 
 

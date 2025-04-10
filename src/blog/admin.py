@@ -1,13 +1,15 @@
 from django.contrib import admin
-
-
 from . import models
 
 @admin.register(models.Cliente)
 class ClientesAdmin(admin.ModelAdmin):
-    list_display = ("nombre", "apellido", "usuario")
-    search_fields = ("nombre", "apellido", "usuario")
+    list_display = ("nombre", "apellido", "get_username")
+    search_fields = ("nombre", "apellido", "user__username")
     ordering = ["apellido"]
+    
+    def get_username(self, obj):
+        return obj.user.username
+    get_username.short_description = "Usuario"
 
 @admin.register(models.Producto)
 class ProductosAdmin(admin.ModelAdmin):
