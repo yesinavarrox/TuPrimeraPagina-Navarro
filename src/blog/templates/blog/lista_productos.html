@@ -6,12 +6,19 @@
     <div class="text-center">
         <h2 class="titulo2 mb-4">Lista de Productos</h2>
     </div>
+    <form method="get" action="{% url 'HoneyPanqui:lista_productos' %}" class="d-flex justify-content-center align-items-center gap-2 mb-4">
+        <input type="text" name="q" placeholder="Buscar producto..." class="form-control w-50 pastel-input">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
 <img src="{% static 'blog/chocorosa.jpg' %}" alt="PANCHOCH" height="200px">
 <img src="{% static 'blog/normi.jpg' %}" alt="PANQUI" height="200px"> 
 <img src="{% static 'blog/dulce.jpg' %}" alt="PANQUIS" height="200px">
 <img src="{% static 'blog/fruti.jpg' %}" alt="PANFRES" height="200px">
 <img src="{% static 'blog/chococafe.jpg' %}" alt="PANCHOCHS" height="200px">
 <img src="{% static 'blog/plat.jpg' %}" alt="PANQUII" height="200px">
+
+</form>
     <div class="row">
         {% for producto in productos %}
             <div class="col-md-4 mb-3">
@@ -23,6 +30,11 @@
                     </div>
                 </div>
             </div>
+        {% empty %}
+            <p class="text-center text-muted pastel-card p-3">
+                No se encontraron productos con ese nombre.
+            </p>
         {% endfor %}
-    </div>  
+    </div>
+
 {% endblock %}
