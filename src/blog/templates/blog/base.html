@@ -77,7 +77,7 @@
             <a class="navbar-brand titulo-derretido" href={% url 'HoneyPanqui:lista_productos' %}>Productos</a>
             <a class="navbar-brand titulo-derretido" href={% url 'HoneyPanqui:about' %}>Nosotros</a>
             {% if  user.is_authenticated %}
-                <a class="navbar-brand botones-especiales" href="{% url 'HoneyPanqui:ver_pedidos' %}" style="margin-right: 20px !important;">Mi carrito</a>
+                <a class="navbar-brand botones-especiales" href="{% url 'HoneyPanqui:ver_carrito' %}" style="margin-right: 20px !important;">Mi carrito</a>
                 <form action="{% url 'HoneyPanqui:logout' %}" method="post">
                     {% csrf_token %}
                     <button type="submit" class="botones-especiales enlace-navbar">Cerrar Sesión</button>

@@ -27,7 +27,7 @@ class RegistroView(CreateView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, "¡Registro Completado. ¡Ahora puedes comprar hotcakes iniciando tu sesión!")
+        messages.success(self.request, "Registro Completado. ¡Ahora puedes comprar hotcakes iniciando tu sesión!")
         return super().form_valid(form)
 
 #PEDIDOS
