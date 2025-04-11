@@ -54,6 +54,16 @@ def ver_carrito(request):
     })
 
 @login_required
+def eliminar_del_carrito(request, producto_id):
+    carrito = request.session.get('carrito', {})
+    
+    if str(producto_id) in carrito:
+        del carrito[str(producto_id)]
+        request.session['carrito'] = carrito  
+
+    return redirect('HoneyPanqui:ver_carrito')  
+
+@login_required
 def agregar_al_carrito(request, producto_id):
     carrito = request.session.get('carrito', {})
 

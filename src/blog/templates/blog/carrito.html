@@ -11,6 +11,8 @@
                                  <h5 class="cuerpo">
                                     {{ item.producto.nombre }} - Cantidad: {{ item.cantidad }} - Subtotal: ${{ item.subtotal }}
                                 </h5>
+                                <a href="{% url 'HoneyPanqui:eliminar_del_carrito' item.producto.id %}" 
+                                class="btn btn-danger btn-sm">Eliminar</a>
                             </div>
                         </div>
                     </div> 
