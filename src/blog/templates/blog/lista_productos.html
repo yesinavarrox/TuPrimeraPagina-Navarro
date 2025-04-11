@@ -10,6 +10,17 @@
         <input type="text" name="q" placeholder="Buscar producto..." class="form-control w-50 pastel-input">
         <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
+    <div class="text-center"> 
+        {% if messages %}
+            {% for message in messages %}
+                {% if 'carrito' in message.tags %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
 
 <img src="{% static 'blog/chocorosa.jpg' %}" alt="PANCHOCH" height="200px">
 <img src="{% static 'blog/normi.jpg' %}" alt="PANQUI" height="200px"> 
@@ -27,6 +38,10 @@
                         <h5 class="card-title producto-nombre">{{ producto.nombre }}</h5>
                         <p class="card-text text-muted text-center">{{ producto.descripcion }}</p>
                         <h6 class="text-success text-center">${{ producto.precio }}</h6>
+                        <form method="post" action="{% url 'HoneyPanqui:agregar_al_carrito' producto.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Agregar al carrito</button>
+                          </form>
                     </div>
                 </div>
             </div>

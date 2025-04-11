@@ -1,7 +1,9 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django import forms
-from .models import Cliente
+from django.db import transaction
+from .models import Cliente, Producto, Pedido
 
 class ClienteForm(AuthenticationForm):
     class Meta:
@@ -20,7 +22,7 @@ class RegistroForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ["username", "password1", "password2", "email"]
+        fields = ["username", "password1", "password2"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -66,15 +68,32 @@ class RegistroForm(UserCreationForm):
             'rows': 2
         })
 
-    def save(self, commit=True):
-        user = super().save(commit=commit)
+def save(self, commit=True):
+    with transaction.atomic():
+        user = super().save(commit=False)
+        user.email = self.cleaned_data["email"]
         if commit:
-            Cliente.objects.create(
-                user=user,
-                nombre=self.cleaned_data["nombre"],
-                apellido=self.cleaned_data["apellido"],
-                email=self.cleaned_data["email"],
-                nacimiento=self.cleaned_data["nacimiento"],
-                direccion=self.cleaned_data["direccion"]
-            )
-        return user
+            user.save()
+            if not Cliente.objects.filter(user=user).exists():
+                Cliente.objects.create(
+                    user=user,
+                    nombre=self.cleaned_data["nombre"],
+                    apellido=self.cleaned_data["apellido"],
+                    email=self.cleaned_data["email"],
+                    nacimiento=self.cleaned_data["nacimiento"],
+                    direccion=self.cleaned_data["direccion"]
+                )
+    return user
+    
+@login_required
+def agregar_al_carrito(request, producto_id):
+    carrito = request.session.get('carrito', {})
+
+    producto_id_str = str(producto_id)
+    if producto_id_str in carrito:
+        carrito[producto_id_str] += 1
+    else:
+        carrito[producto_id_str] = 1
+
+    request.session['carrito'] = carrito
+    return redirect('HoneyPanqui:ver_carrito')

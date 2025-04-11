@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<h2>Mis Pedidos</h2>
+
+{% if pedidos %}
+  <ul>
+    {% for pedido in pedidos %}
+      <li>
+        Pedido #{{ pedido.id }} - Total: ${{ pedido.total }} <br>
+        Productos:
+        <ul>
+          {% for producto in pedido.productos.all %}
+            <li>{{ producto.nombre }} - ${{ producto.precio }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No tenés pedidos aún.</p>
+{% endif %}
+
+<a href="{% url 'HoneyPanqui:lista_productos' %}">Volver a la tienda</a>
+{% endblock %}

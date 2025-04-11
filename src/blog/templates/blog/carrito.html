@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<h2>Tu carrito</h2>
+<ul>
+  {% for item in productos %}
+    <li>
+      {{ item.producto.nombre }} - Cantidad: {{ item.cantidad }} - Subtotal: ${{ item.subtotal }}
+    </li>
+  {% endfor %}
+</ul>
+
+<p><strong>Total:</strong> ${{ total }}</p>
+
+<form action="{% url 'HoneyPanqui:confirmar_pedido' %}" method="post">
+  {% csrf_token %}
+  <button type="submit">Confirmar Pedido</button>
+</form>
+
+{% endblock %}

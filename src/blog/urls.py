@@ -10,8 +10,13 @@ urlpatterns = [
     path('', views.inicio, name='home'), 
     path('productos/', lista_productos, name='lista_productos'),
     path('about/', views.about, name="about"),
-# PRODUCTO
+# CLIENTE
     path('login/', views.ClienteView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(template_name='blog/logout.html'), name='logout'),
     path('registro/', views.RegistroView.as_view(), name='registro'),
+# PRODUCTO
+    path('carrito/', views.ver_carrito, name='ver_carrito'),
+    path('carrito/agregar/<int:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
+    path('carrito/confirmar/', views.confirmar_pedido, name='confirmar_pedido'),
+    path('pedidos/', views.ver_pedidos, name='ver_pedidos'),
 ]

@@ -4,37 +4,48 @@
     <div class="text-center">
         <h2 class="titulo2 mb-4">Registro de Usuarios</h2>
     </div> 
-    <div class="container d-flex justify-content-center mt-5">
+    <div class="container d-flex justify-content-center mt-3">
         <div class="col-md-5">
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <h5 class="card-title producto-nombre">
                         <form method="post">
                             {% csrf_token %}
+                            {{ form.non_field_errors }}
                             <div style="margin-bottom: 15px;">
+                                <label for="{{ form.nombre.id_for_label }}"  style="font-size: 17px; display: block; text-align: center;" class="cuerpo">Ingrese sus datos:</label>
                                 {{ form.nombre }}
+                                {{ form.nombre.errors }}
                             </div>
-                            <div style="margin-bottom: 15px;">
+                            <div style="margin-bottom: 10px;">
                                 {{ form.apellido }}
+                                {{ form.apellido.errors }}
                             </div>
                             <div style="margin-bottom: 15px;">
-                                <label for="{{ form.fecha_nacimiento.id_for_label }}" style="font-size: 18px;" class="cuerpo">Fecha de nacimiento:</label>
+                                <label for="{{ form.nacimiento.id_for_label }}"  style="font-size: 17px; display: block; text-align: center;" class="cuerpo">Fecha de nacimiento:</label>
                                 {{ form.nacimiento }}
+                                {{ form.nacimiento.errors }}
                             </div>
-                            <div style="margin-bottom: 15px;">
+                            <div style="margin-bottom: 10px;">
                                 {{ form.direccion }}
+                                {{ form.direccion.errors }}
                             </div>
                             <div style="margin-bottom: 15px;">
+                                <label for="{{ form.username.id_for_label }}"  style="font-size: 17px; display: block; text-align: center;" class="cuerpo">Crea tu usuario:</label>
                                 {{ form.username }}
+                                {{ form.username.errors }}
                             </div>
                                 <div style="margin-bottom: 15px;">
                                     {{ form.email }}
+                                    {{ form.email.errors }}
                                 </div>
                                 <div style="margin-bottom: 15px;">
                                     {{ form.password1 }}
+                                    {{ form.password1.errors }}
                                 </div>
                                 <div style="margin-bottom: 15px;">
                                     {{ form.password2 }}
+                                    {{ form.password2.errors }}
                                 </div>
                             <button type="submit" class="btn btn-primary w-100 mt-3">Registrar</button>
                         </form>
