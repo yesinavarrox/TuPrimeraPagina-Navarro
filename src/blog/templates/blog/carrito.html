@@ -1,20 +1,28 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-<h2>Tu carrito</h2>
-<ul>
-  {% for item in productos %}
-    <li>
-      {{ item.producto.nombre }} - Cantidad: {{ item.cantidad }} - Subtotal: ${{ item.subtotal }}
-    </li>
-  {% endfor %}
-</ul>
+    <div class="text-center">
+        <h2 class="titulo2 mb-4">Tu carrito</h2>
+            <div class="row">
+                {% for item in productos %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                 <h5 class="cuerpo">
+                                    {{ item.producto.nombre }} - Cantidad: {{ item.cantidad }} - Subtotal: ${{ item.subtotal }}
+                                </h5>
+                            </div>
+                        </div>
+                    </div> 
+                {% endfor %}
+            </div> 
+            
+                <p><strong>Total:</strong> ${{ total }}</p>
 
-<p><strong>Total:</strong> ${{ total }}</p>
-
-<form action="{% url 'HoneyPanqui:confirmar_pedido' %}" method="post">
-  {% csrf_token %}
-  <button type="submit">Confirmar Pedido</button>
-</form>
+          <form action="{% url 'HoneyPanqui:confirmar_pedido' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary w-20 mt-3">Confirmar pedido</button>
+          </form>
+    </div>
 
 {% endblock %}

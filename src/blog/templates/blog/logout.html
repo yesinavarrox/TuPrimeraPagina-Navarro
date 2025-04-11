@@ -1,7 +1,8 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-    <p>Has cerrado sesión correctamente.</p>
-    <a href="{% url 'HoneyPanqui:home' %}"><button>ok</button></a>
-
+    <div class="text-center"> 
+        <h1 class="cuerpo">Vuelve pronto para comer más Hotcakes...</h1>
+            <a href="{% url 'HoneyPanqui:home' %}"><button class="btn btn-primary w-20 mt-3">Volveré</button></a>
+    </div>
 {% endblock %}

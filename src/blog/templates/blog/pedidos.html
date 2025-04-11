@@ -1,25 +1,34 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-<h2>Mis Pedidos</h2>
+<div class="text-center container">
+    <h2 class="titulo2 mb-4">Mis pedidos</h2>
 
-{% if pedidos %}
-  <ul>
-    {% for pedido in pedidos %}
-      <li>
-        Pedido #{{ pedido.id }} - Total: ${{ pedido.total }} <br>
-        Productos:
-        <ul>
-          {% for producto in pedido.productos.all %}
-            <li>{{ producto.nombre }} - ${{ producto.precio }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>No tenés pedidos aún.</p>
-{% endif %}
+    <div class="row justify-content-center">
+        {% if pedidos %}
+            {% for pedido in pedidos %}
+                <div class="col-md-8 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-start">
+                            <h5 class="cuerpo fw-bold mb-2">Pedido #{{ pedido.id }}</h5>
+                            <p class="mb-1">Total: <strong>${{ pedido.total }}</strong></p>
+                            <p class="mb-1">Productos:</p>
+                            <ul class="list-group list-group-flush">
+                                {% for producto in pedido.productos.all %}
+                                    <li class="list-group-item">{{ producto.nombre }} - ${{ producto.precio }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h1 class="cuerpo">No tenés pedidos realizados.</h1>
+        {% endif %}
+    </div>
 
-<a href="{% url 'HoneyPanqui:lista_productos' %}">Volver a la tienda</a>
+    <a href="{% url 'HoneyPanqui:lista_productos' %}" class="btn btn-outline-primary mt-4">Volver a la tienda</a>
+</div>
+
+
 {% endblock %}

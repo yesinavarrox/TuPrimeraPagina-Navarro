@@ -9,7 +9,7 @@ class Cliente(models.Model):
     apellido = models.CharField(max_length=80)
     email = models.EmailField(unique=True)
     nacimiento = models.DateField(null=True, blank=True)
-    direccion = models.TextField(unique=True)
+    direccion = models.TextField(max_length=100)
     
     def __str__(self) -> str:
         return f"{self.user.username} ({self.nombre})"

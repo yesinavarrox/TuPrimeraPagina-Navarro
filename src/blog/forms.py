@@ -1,9 +1,10 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 from django import forms
 from django.db import transaction
-from .models import Cliente, Producto, Pedido
+from .models import Cliente
 
 class ClienteForm(AuthenticationForm):
     class Meta:
@@ -68,22 +69,22 @@ class RegistroForm(UserCreationForm):
             'rows': 2
         })
 
-def save(self, commit=True):
-    with transaction.atomic():
-        user = super().save(commit=False)
-        user.email = self.cleaned_data["email"]
-        if commit:
-            user.save()
-            if not Cliente.objects.filter(user=user).exists():
-                Cliente.objects.create(
-                    user=user,
-                    nombre=self.cleaned_data["nombre"],
-                    apellido=self.cleaned_data["apellido"],
-                    email=self.cleaned_data["email"],
-                    nacimiento=self.cleaned_data["nacimiento"],
-                    direccion=self.cleaned_data["direccion"]
-                )
-    return user
+    def save(self, commit=True):
+        with transaction.atomic():
+            user = super().save(commit=False)
+            user.email = self.cleaned_data["email"]
+            if commit:
+                user.save()
+                if not Cliente.objects.filter(user=user).exists():
+                    Cliente.objects.create(
+                        user=user,
+                        nombre=self.cleaned_data["nombre"],
+                        apellido=self.cleaned_data["apellido"],
+                        email=self.cleaned_data["email"],
+                        nacimiento=self.cleaned_data["nacimiento"],
+                        direccion=self.cleaned_data["direccion"]
+                    )
+        return user
     
 @login_required
 def agregar_al_carrito(request, producto_id):
@@ -96,4 +97,4 @@ def agregar_al_carrito(request, producto_id):
         carrito[producto_id_str] = 1
 
     request.session['carrito'] = carrito
-    return redirect('HoneyPanqui:ver_carrito')
+    return redirect('HoneyPanqui:lista_productos')

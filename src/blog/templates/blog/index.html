@@ -1,12 +1,39 @@
 {% extends "blog/base.html" %}
 
+{% load static %}
+
 {% block content %}
 
     <div class="text-center">
-        <h2 class="titulo2 mb-4">¡Bienvenidos a nuestra tienda!</h2>
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
+        <h2 class="titulo2 mb-0">¡Bienvenidos a nuestra tienda!</h2>
+            <h3 class="cuerpo">   
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </h3> 
+            <div>
+                <style>
+                    .video-bonito {
+                        display: block;
+                        width: 100%;
+                        max-width: 960px;
+                        margin: 30px auto 0 auto; 
+                        border: 6px solid #f8cde8;
+                        border-radius: 20px;
+                        box-shadow: 0 0 20px rgba(248, 205, 232, 0.5);
+                        transition: transform 0.3s ease;
+                    }
+                
+                    .video-bonito:hover {
+                        transform: scale(1.01);
+                    }
+                </style>
+                
+                <video class="video-bonito" autoplay muted loop>
+                    <source src="{% static 'blog/inicio.mp4' %}" type="video/mp4">
+                    Tu navegador no soporta el video.
+                </video>
+            </div> 
     </div>
 
 {% endblock %}
